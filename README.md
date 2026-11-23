@@ -25,3 +25,11 @@ When this folder opens in VS Code, the Vite development server starts automatica
 To start it manually, run `npm run dev` in the project folder.
 
 For a complete Hinglish walkthrough of the project, see [PROJECT_GUIDE_HINGLISH.md](./PROJECT_GUIDE_HINGLISH.md).
+
+## Publishing on GitHub Pages
+
+The GitHub repository shows the source code. To publish the website, enable **Settings → Pages → Build and deployment → Source: GitHub Actions**. The workflow deploys the site whenever changes are pushed to `main`.
+
+The published site will be available at:
+
+https://amandanger222-create.github.io/vite-project-new/
