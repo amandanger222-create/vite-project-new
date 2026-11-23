@@ -36,7 +36,24 @@ function Signup() {
       return;
     }
 
-    setMessage('Registration successful.');
+    const normalizedEmail = email.trim().toLowerCase();
+    const savedAccounts = JSON.parse(localStorage.getItem('astraflowAccounts') || '[]');
+    const accountExists = savedAccounts.some((account) => account.email === normalizedEmail);
+
+    if (accountExists) {
+      setMessage('An account with this email already exists.');
+      setIsError(true);
+      return;
+    }
+
+    savedAccounts.push({
+      fullName: fullName.trim(),
+      email: normalizedEmail,
+      password,
+    });
+    localStorage.setItem('astraflowAccounts', JSON.stringify(savedAccounts));
+
+    setMessage('Registration successful. You can now log in.');
   }
 
   return (

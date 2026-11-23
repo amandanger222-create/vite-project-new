@@ -8,25 +8,39 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let isError = false;
     setIsError(false);
-    if (email == '') {
+    if (!email.trim()) {
       setMessage('Please enter your email address.');
       setIsError(true);
       return;
     }
 
-    if (password == '') {
+    if (!password) {
       setMessage('Please enter your password.');
       setIsError(true);
       return;
     }
 
-    if(!isError){
-        setMessage('Login successful.');
+    const normalizedEmail = email.trim().toLowerCase();
+    const savedAccounts = JSON.parse(localStorage.getItem('astraflowAccounts') || '[]');
+    const demoAccounts = [
+      {
+        fullName: 'Demo User',
+        email: 'demo@astraflow.com',
+        password: 'Demo@123',
+      },
+    ];
+    const account = [...demoAccounts, ...savedAccounts].find(
+      (item) => item.email === normalizedEmail && item.password === password,
+    );
+
+    if (!account) {
+      setMessage('Invalid email or password.');
+      setIsError(true);
+      return;
     }
 
-   
+    setMessage(`Login successful. Welcome, ${account.fullName}.`);
   }
 
   return (
